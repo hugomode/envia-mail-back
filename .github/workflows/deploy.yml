@@ -27,13 +27,13 @@ jobs:
       run: |
         set -x
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
-          rm -rf ~/workspace/new-hattrick/${{ env.repo_name  }}
+          rm -rf ~/workspace/common/${{ env.repo_name  }}
         "
 
     - name: Create directory
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
-          mkdir -p ~/workspace/new-hattrick/${{ env.repo_name }}
+          mkdir -p ~/workspace/common/${{ env.repo_name }}
         "   
 
     - name: Copy files to remote server
@@ -41,12 +41,12 @@ jobs:
         set -e
         pwd
         ls -l
-        scp -r -o StrictHostKeyChecking=no "$(pwd)"/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/workspace/new-hattrick/${{ env.repo_name }}
+        scp -r -o StrictHostKeyChecking=no "$(pwd)"/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/workspace/common/${{ env.repo_name }}
 
     - name: Deploy with Docker Compose
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
-          cd ~/workspace/new-hattrick/${{ env.repo_name }} &&          
+          cd ~/workspace/common/${{ env.repo_name }} &&          
           export SMTP_USERNAME=${{ secrets.SMTP_USERNAME }} &&          
           export SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }} &&                    
           docker compose build --no-cache && docker compose up -d --force-recreate
