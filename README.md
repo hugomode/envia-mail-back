@@ -14,14 +14,13 @@ API en Go para envio de correos via SMTP con Gin y documentacion Swagger.
 - `SMTP_PORT`: puerto SMTP (para Gmail usar `587`)
 - `SMTP_USERNAME`: usuario SMTP
 - `SMTP_PASSWORD`: password SMTP (para Gmail usar App Password)
-- `FROM`: remitente por defecto cuando `from` no termina en `@uchile.cl`
 - `TIMEOUT_SECONDS`: timeout de envio SMTP en segundos
 - `HOST` (opcional): host publicado en Swagger (default: `localhost:8080`)
 
 Para Gmail:
 - `SERVER=smtp.gmail.com`
 - `SMTP_PORT=587`
-- `SMTP_USERNAME` y `FROM` deben ser la misma cuenta Gmail
+- `SMTP_USERNAME` deben ser la misma cuenta Gmail
 - `SMTP_PASSWORD` debe ser una App Password de Google (no la clave normal)
 
 ## Ejecucion local
