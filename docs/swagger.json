@@ -1,0 +1,129 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API para el envio de correos.",
+        "title": "Envia Mail Back",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Hugo Cárcamo",
+            "url": "https://mesadeservicios.uchile.cl/otrs/index.pl",
+            "email": "hugo.carcamo@uchile.cl"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/api/v1/notificacion": {
+            "post": {
+                "description": "metodo para enviar correo.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Send"
+                ],
+                "summary": "metodo para enviar correo.",
+                "operationId": "Send",
+                "parameters": [
+                    {
+                        "description": "Contenido del correo con adjuntos en base64",
+                        "name": "request",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/api.Email"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.Adjunto": {
+            "type": "object",
+            "properties": {
+                "archivo": {
+                    "type": "string"
+                },
+                "nombre_archivo": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.Email": {
+            "type": "object",
+            "properties": {
+                "adjuntos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/api.Adjunto"
+                    }
+                },
+                "asunto": {
+                    "type": "string"
+                },
+                "bcc": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "cc": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "contenido": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "string"
+                },
+                "to": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

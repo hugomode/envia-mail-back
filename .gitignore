@@ -1,0 +1,11 @@
+.scannerwork/
+.idea/
+.env.desa
+config/auto.sh
+tmp/
+test/resources/download/*
+.vscode/
+*.orig
+.env
+
+*.tmp

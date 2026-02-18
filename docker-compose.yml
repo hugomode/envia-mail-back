@@ -1,0 +1,25 @@
+services:
+  envia-mail-back:
+    build:
+      context: .
+      dockerfile: ./Dockerfile 
+    image: hugomode/envia-mail-back:latest
+    container_name: envia-mail-back
+    ports:
+      - "8099:8080"
+    environment:
+      TZ: America/Santiago
+      GIN_MODE: release
+      LOG_LEVEL: info
+      SMTP_USERNAME: ${SMTP_USERNAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SERVER: smtp.gmail.com
+      SMTP_PORT: 587
+      TIMEOUT_SECONDS: 30
+    networks:
+      - proxy
+    restart: unless-stopped   
+
+networks:
+  proxy:
+    external: true

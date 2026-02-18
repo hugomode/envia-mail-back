@@ -1,0 +1,86 @@
+basePath: /api/v1
+host: localhost:8080
+info:
+  contact:
+    email: hugo.carcamo@uchile.cl
+    name: Hugo Cárcamo
+    url: https://mesadeservicios.uchile.cl/otrs/index.pl
+  description: API para el envio de correos.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Envia Mail Back
+  version: "1.0"
+paths:
+  /api/v1/notificacion:
+    post:
+      consumes:
+      - application/json
+      description: metodo para enviar correo.
+      operationId: Send
+      parameters:
+      - description: Contenido del correo con adjuntos en base64
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/api.Email'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: metodo para enviar correo.
+      tags:
+      - Send
+swagger: "2.0"
+definitions:
+  api.Adjunto:
+    properties:
+      archivo:
+        type: string
+      nombre_archivo:
+        type: string
+    type: object
+  api.Email:
+    properties:
+      adjuntos:
+        items:
+          $ref: '#/definitions/api.Adjunto'
+        type: array
+      asunto:
+        type: string
+      bcc:
+        items:
+          type: string
+        type: array
+      cc:
+        items:
+          type: string
+        type: array
+      contenido:
+        type: string
+      from:
+        type: string
+      to:
+        items:
+          type: string
+        type: array
+    type: object
