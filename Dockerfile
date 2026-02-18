@@ -4,7 +4,7 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-RUN GOOS=linux GOARCH=amd64 go build -o /app/myapp ./cmd/main.go
+RUN GOOS=linux go build -o /app/myapp ./cmd/main.go
 
 FROM alpine:3.20
 
